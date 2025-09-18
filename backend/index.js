@@ -4,13 +4,46 @@ import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
-app.use(express.json())
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+app.use(morgan("dev"));
 
-const PORT = process.env.PORT || 8000
+// db connection
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("DB Connected Successfully")).catch((err)=> console.log("Failed to Connect to DB :",err))
+app.use(express.json());
 
-app.listen(PORT, ()=>{
-    console.log(`Server is up and running on PORT NUMBER : ${PORT}`)
-})
+const PORT = process.env.PORT || 8000;
+
+app.get("/", async (req, res) => {
+  res.status(200).json({
+    message: "Welcome to Task Hub",
+  });
+});
+
+// error middleware
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(500).json({
+    message: "Internal Server Error",
+  });
+});
+
+// not found middleware
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Not Found",
+  });
+});
+app.listen(PORT, () => {
+  console.log(`Server is up and running on PORT NUMBER : ${PORT}`);
+});
