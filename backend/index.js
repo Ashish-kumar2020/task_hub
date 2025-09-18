@@ -4,6 +4,8 @@ import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 
+import routes from "./routes/index.js";
+
 dotenv.config();
 
 const app = express();
@@ -29,6 +31,8 @@ app.get("/", async (req, res) => {
     message: "Welcome to Task Hub",
   });
 });
+
+app.use("/api-vi",routes);
 
 // error middleware
 app.use((err, req, res, next) => {
