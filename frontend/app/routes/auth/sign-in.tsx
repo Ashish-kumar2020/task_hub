@@ -38,7 +38,7 @@ const SignIn = () => {
   };
   return (
     <div className="min-h-screen flex items-center justify-center ">
-      <Card className="w-full max-w-6xl shadow-xl h-[27rem]">
+      <Card className="max-w-md w-full shadow-xl h-[29rem]">
         <CardHeader className="text-center mb-5">
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
@@ -75,7 +75,10 @@ const SignIn = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                      <div className="flex items-center justify-between">
+                        <FormLabel>Password</FormLabel>
+                        <Link to="/forgot-password" className="text-sm text-blue-600">Forgot Password</Link>
+                    </div>
                     <FormControl>
                       <Input
                         type="password"
@@ -94,10 +97,10 @@ const SignIn = () => {
             </form>
           </Form>
           <CardFooter>
-            <div className="flex items-center justify-center py-2">
+            <div className="flex items-center justify-center mt-6 w-full">
               <p className="text-sm text-muted-foreground">
                 Don&apos;t have an account?
-              <Link to="/sign-up" className="text-black hover:underline">Sign up</Link>
+              <Link to="/sign-up" className="text-black hover:underline"> Sign up</Link>
               </p>
             </div>
           </CardFooter>
