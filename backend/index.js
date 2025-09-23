@@ -32,7 +32,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.use("/api-vi",routes);
+app.use("/api-v1",routes);
 
 // error middleware
 app.use((err, req, res, next) => {

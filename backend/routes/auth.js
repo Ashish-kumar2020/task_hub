@@ -17,7 +17,7 @@ router.post(
 
 
 router.post(
-    "/register",
+    "/login",
     validateRequest({
       body: loginSchema,
     }),
